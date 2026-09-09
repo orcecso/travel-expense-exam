@@ -298,7 +298,7 @@ as String,
 /// @nodoc
 mixin _$CreateExpenseRequestModel {
 
- double get amount; DateTime get date; String get category; String get note;
+ double get amount;@JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime get date; String get category; String get note;
 /// Create a copy of CreateExpenseRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -336,7 +336,7 @@ abstract mixin class $CreateExpenseRequestModelCopyWith<$Res>  {
   factory $CreateExpenseRequestModelCopyWith(CreateExpenseRequestModel value, $Res Function(CreateExpenseRequestModel) _then) = _$CreateExpenseRequestModelCopyWithImpl;
 @useResult
 $Res call({
- double amount, DateTime date, String category, String note
+ double amount,@JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime date, String category, String note
 });
 
 
@@ -444,7 +444,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double amount,  DateTime date,  String category,  String note)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double amount, @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)  DateTime date,  String category,  String note)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreateExpenseRequestModel() when $default != null:
 return $default(_that.amount,_that.date,_that.category,_that.note);case _:
@@ -465,7 +465,7 @@ return $default(_that.amount,_that.date,_that.category,_that.note);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double amount,  DateTime date,  String category,  String note)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double amount, @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)  DateTime date,  String category,  String note)  $default,) {final _that = this;
 switch (_that) {
 case _CreateExpenseRequestModel():
 return $default(_that.amount,_that.date,_that.category,_that.note);case _:
@@ -485,7 +485,7 @@ return $default(_that.amount,_that.date,_that.category,_that.note);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double amount,  DateTime date,  String category,  String note)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double amount, @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)  DateTime date,  String category,  String note)?  $default,) {final _that = this;
 switch (_that) {
 case _CreateExpenseRequestModel() when $default != null:
 return $default(_that.amount,_that.date,_that.category,_that.note);case _:
@@ -500,11 +500,11 @@ return $default(_that.amount,_that.date,_that.category,_that.note);case _:
 @JsonSerializable()
 
 class _CreateExpenseRequestModel extends CreateExpenseRequestModel {
-  const _CreateExpenseRequestModel({required this.amount, required this.date, required this.category, required this.note}): super._();
+  const _CreateExpenseRequestModel({required this.amount, @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) required this.date, required this.category, required this.note}): super._();
   factory _CreateExpenseRequestModel.fromJson(Map<String, dynamic> json) => _$CreateExpenseRequestModelFromJson(json);
 
 @override final  double amount;
-@override final  DateTime date;
+@override@JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) final  DateTime date;
 @override final  String category;
 @override final  String note;
 
@@ -543,7 +543,7 @@ abstract mixin class _$CreateExpenseRequestModelCopyWith<$Res> implements $Creat
   factory _$CreateExpenseRequestModelCopyWith(_CreateExpenseRequestModel value, $Res Function(_CreateExpenseRequestModel) _then) = __$CreateExpenseRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- double amount, DateTime date, String category, String note
+ double amount,@JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime date, String category, String note
 });
 
 

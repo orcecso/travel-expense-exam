@@ -6,12 +6,31 @@ part 'expense_model.g.dart';
 
 /// Converts a timestamp in seconds to a DateTime object.
 DateTime dateTimeFromTimestamp(int timestamp) {
-  return DateTime.fromMillisecondsSinceEpoch(
-    timestamp * 1000,
-  );
+  return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
 }
 
 int dateTimeToTimestamp(DateTime date) {
+  return date.millisecondsSinceEpoch ~/ 1000;
+}
+
+// for parsing date from json, we need to handle both int and string values
+DateTime dateTimeFromJson(dynamic value) {
+  if (value is int) {
+    return DateTime.fromMillisecondsSinceEpoch(value * 1000);
+  }
+
+  if (value is num) {
+    return DateTime.fromMillisecondsSinceEpoch(value.toInt() * 1000);
+  }
+
+  if (value is String) {
+    return DateTime.parse(value);
+  }
+
+  throw FormatException('Invalid date value: $value');
+}
+
+int dateTimeToJson(DateTime date) {
   return date.millisecondsSinceEpoch ~/ 1000;
 }
 
@@ -23,10 +42,7 @@ abstract class ExpenseModel with _$ExpenseModel {
     required String id,
     required double amount,
 
-    @JsonKey(
-      fromJson: dateTimeFromTimestamp,
-      toJson: dateTimeToTimestamp,
-    )
+    @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
     required DateTime date,
     required String category,
     required String note,
@@ -36,12 +52,12 @@ abstract class ExpenseModel with _$ExpenseModel {
       _$ExpenseModelFromJson(json);
 
   Expense toEntity() => Expense(
-        id: id,
-        amount: amount,
-        date: date,
-        category: ExpenseCategoryX.fromApiValue(category),
-        note: note,
-      );
+    id: id,
+    amount: amount,
+    date: date,
+    category: ExpenseCategoryX.fromApiValue(category),
+    note: note,
+  );
 }
 
 @freezed
@@ -50,7 +66,13 @@ abstract class CreateExpenseRequestModel with _$CreateExpenseRequestModel {
 
   const factory CreateExpenseRequestModel({
     required double amount,
+
+    @JsonKey(
+      fromJson: dateTimeFromJson,
+      toJson: dateTimeToJson,
+    )
     required DateTime date,
+
     required String category,
     required String note,
   }) = _CreateExpenseRequestModel;

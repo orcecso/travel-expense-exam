@@ -28,7 +28,7 @@ _CreateExpenseRequestModel _$CreateExpenseRequestModelFromJson(
   Map<String, dynamic> json,
 ) => _CreateExpenseRequestModel(
   amount: (json['amount'] as num).toDouble(),
-  date: DateTime.parse(json['date'] as String),
+  date: dateTimeFromJson(json['date']),
   category: json['category'] as String,
   note: json['note'] as String,
 );
@@ -37,7 +37,7 @@ Map<String, dynamic> _$CreateExpenseRequestModelToJson(
   _CreateExpenseRequestModel instance,
 ) => <String, dynamic>{
   'amount': instance.amount,
-  'date': instance.date.toIso8601String(),
+  'date': dateTimeToJson(instance.date),
   'category': instance.category,
   'note': instance.note,
 };
